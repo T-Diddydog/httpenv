@@ -28,6 +28,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
+#NEW: (START) : Write on pull requests
+    permissions:
+      pull-requests: write # needed to create and update comments in PRs
+#NEW: (END) ############################################################
+
 #NEW: (START) : Set's up system emulator
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
