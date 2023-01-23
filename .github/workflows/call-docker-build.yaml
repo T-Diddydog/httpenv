@@ -28,6 +28,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
+#NEW: (START) : Set's up system emulator
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v1
+#NEW: (END) ############################################################
+
 #NEW: (START) : Buildx is for building new Docker images
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
@@ -45,9 +50,13 @@ jobs:
           push: ${{ github.event_name != 'pull_request' }}
           tags: bretfisher/allhands22:latest,bretfisher/allhands22:01
 
-#NEW: (STAR) : Caching is utilised so docker images can be built quicker!
+#NEW: (START) : Caching is utilised so docker images can be built quicker!
           cache-from: type=gha
           cache-to: type=gha,mode=max
+#NEW: (END) ############################################################
+
+#NEW: (START) : List of images to choose from on docker hub!
+          platforms: linux/amd64,linux/arm64,linux/arm/v7
 #NEW: (END) ############################################################
 
   call-docker-build:
