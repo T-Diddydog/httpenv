@@ -50,6 +50,24 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
+#NEW: (START) : Add Unit Test
+      - name: Build and export to Docker
+        uses: docker/build-push-action@v2
+        with:
+          push: false
+          load: true # Export to Docker Engine rather than pushing to a registry
+          tags: ${{ github.run_id }}
+          target: test
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+          platforms: linux/amd64
+
+        # for simple tests (npm test, etc.) just run a local image in docker
+      - name: Unit Testing in Docker
+        run: |
+          docker run --rm ${{ github.run_id }} echo "run test commands here"
+#NEW: (END) ############################################################
+
 #NEW: (START) : Add tags with to image
       - name: Docker meta
         id: docker_meta
