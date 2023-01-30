@@ -129,9 +129,9 @@ jobs:
           tags: bretfisher/allhands22:latest,bretfisher/allhands22:01
 
 #NEW: (START) Do this on a push or pull request
-          push: true
-          tags: ${{ steps.docker_meta.outputs.tags }}
-          labels: ${{ steps.docker_meta.outputs.labels }}
+          #push: true
+          #tags: ${{ steps.docker_meta.outputs.tags }}
+          #labels: ${{ steps.docker_meta.outputs.labels }}
 #NEW: (END) ############################################################
 
 #NEW: (START) : Caching is utilised so docker images can be built quicker!
